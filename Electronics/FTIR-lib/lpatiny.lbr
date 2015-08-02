@@ -63,6 +63,7 @@
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="yes"/>
+<layer number="90" name="Modules" color="5" fill="1" visible="no" active="no"/>
 <layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
@@ -3231,6 +3232,54 @@ Source: http://www.silabs.com/Support%20Documents/TechnicalDocs/Si1145-46-47.pdf
 <wire x1="-2.54" y1="1.27" x2="2.54" y2="1.27" width="0.127" layer="21"/>
 <text x="-2.54" y="-1.27" size="1.27" layer="21">+</text>
 </package>
+<package name="AMP_MATE_N_LOCK">
+<description>AMP MATE-N-LOK 1-480424-0 Power connector</description>
+<pad name="12V" x="1.905" y="7.62" drill="1.4986" diameter="2.54" shape="square"/>
+<pad name="GND1" x="1.905" y="2.54" drill="1.4986" diameter="2.54" shape="square"/>
+<pad name="GND2" x="1.905" y="-2.54" drill="1.4986" diameter="2.54" shape="square"/>
+<pad name="5V" x="1.905" y="-7.62" drill="1.4986" diameter="2.54" shape="square"/>
+<hole x="1.905" y="-7.62" drill="1.4986"/>
+<hole x="1.905" y="-2.54" drill="1.4986"/>
+<hole x="1.905" y="2.54" drill="1.4986"/>
+<hole x="1.905" y="7.62" drill="1.4986"/>
+<text x="5.715" y="6.35" size="1.27" layer="21" rot="R90">12V</text>
+<text x="5.715" y="0.635" size="1.27" layer="21" rot="R90">GND</text>
+<text x="5.715" y="-4.445" size="1.27" layer="21" rot="R90">GND</text>
+<text x="5.715" y="-8.89" size="1.27" layer="21" rot="R90">5V</text>
+<wire x1="3.81" y1="12.065" x2="3.81" y2="-12.065" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-12.065" x2="-11.46048125" y2="-12.065" width="0.127" layer="21"/>
+<wire x1="-11.46048125" y1="-12.065" x2="-11.46048125" y2="12.065" width="0.127" layer="21"/>
+<wire x1="-11.46048125" y1="12.065" x2="3.81" y2="12.065" width="0.127" layer="21"/>
+<rectangle x1="-1.27" y1="-10.16" x2="5.08" y2="10.16" layer="43"/>
+<text x="-10.16" y="-9.525" size="1.27" layer="21">13A MAX</text>
+<text x="-5.715" y="8.89" size="1.016" layer="21" rot="R270">MATE-N-LOCK </text>
+<text x="-3.175" y="8.89" size="1.016" layer="21" rot="R270">1-480424-0</text>
+<hole x="-0.594359375" y="10.6172" drill="1.99898125"/>
+<hole x="-0.594359375" y="-10.6172" drill="1.99898125"/>
+<hole x="-8.823959375" y="-4.999990625" drill="3.2"/>
+<hole x="-8.823959375" y="4.999990625" drill="3.2"/>
+<rectangle x1="-11.43" y1="2.54" x2="-6.35" y2="7.62" layer="43"/>
+<rectangle x1="-11.43" y1="-7.62" x2="-6.35" y2="-2.54" layer="43"/>
+<rectangle x1="-2.54" y1="-12.7" x2="1.27" y2="-8.89" layer="43"/>
+<rectangle x1="-2.54" y1="8.89" x2="1.27" y2="12.7" layer="43"/>
+</package>
+<package name="PJ-063BH">
+<description>8A Power Jack</description>
+<hole x="0" y="-2.9972" drill="1.6002"/>
+<wire x1="-4.5466" y1="0" x2="4.5466" y2="0" width="0.127" layer="21"/>
+<pad name="SHD2" x="4.5466" y="-5.0038" drill="2.54"/>
+<pad name="SHD1" x="-4.5466" y="-5.0038" drill="2.54"/>
+<hole x="-4.5466" y="-5.0038" drill="2.54"/>
+<hole x="4.5466" y="-5.0038" drill="2.54"/>
+<hole x="0" y="-11.9888" drill="3.048"/>
+<hole x="0" y="-5.9944" drill="2.3368"/>
+<pad name="GND" x="0" y="-5.9944" drill="2.3368" shape="square" rot="R180"/>
+<pad name="V+" x="0" y="-11.9888" drill="3.048"/>
+<wire x1="-7.62" y1="0" x2="-7.62" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="-7.62" y1="-13.97" x2="7.62" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="7.62" y1="-13.97" x2="7.62" y2="0" width="0.127" layer="21"/>
+<text x="-3.175" y="-9.525" size="1.27" layer="21">8A MAX</text>
+</package>
 </packages>
 <symbols>
 <symbol name="MAT-P">
@@ -4457,6 +4506,13 @@ Source: http://www.silabs.com/Support%20Documents/TechnicalDocs/Si1145-46-47.pdf
 <wire x1="-5.08" y1="2.54" x2="-5.08" y2="0" width="0.254" layer="94"/>
 <wire x1="-5.08" y1="0" x2="5.08" y2="0" width="0.254" layer="94"/>
 <wire x1="5.08" y1="0" x2="5.08" y2="2.54" width="0.254" layer="94"/>
+</symbol>
+<symbol name="JACK_PJ-063BH">
+<description>Power JAck 8A PJ-063BH</description>
+<circle x="0" y="0" radius="5.08" width="0.254" layer="94"/>
+<circle x="0" y="0" radius="1.79605" width="0.254" layer="94"/>
+<pin name="GND" x="-10.16" y="0" length="middle"/>
+<pin name="V+" x="0" y="6.858" length="middle" rot="R270"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -6141,6 +6197,41 @@ C interface.</description>
 <connect gate="G$1" pin="DQ" pad="2"/>
 <connect gate="G$1" pin="GND" pad="3"/>
 <connect gate="G$1" pin="VCC" pad="1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="AMP_MATE_N_LOCK">
+<gates>
+<gate name="G$1" symbol="KPJX-4S-S" x="-2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="AMP_MATE_N_LOCK">
+<connects>
+<connect gate="G$1" pin="+12V" pad="12V"/>
+<connect gate="G$1" pin="+5V" pad="5V"/>
+<connect gate="G$1" pin="GND1" pad="GND1"/>
+<connect gate="G$1" pin="GND2" pad="GND2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="JACK_PJ-063BH">
+<description>PJ-063BH 8A Power Jack</description>
+<gates>
+<gate name="G$1" symbol="JACK_PJ-063BH" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="PJ-063BH">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="V+" pad="V+"/>
 </connects>
 <technologies>
 <technology name=""/>
