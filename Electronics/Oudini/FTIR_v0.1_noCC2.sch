@@ -12559,6 +12559,84 @@ W = angled&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="v-reg">
+<description>&lt;b&gt;Voltage Regulators&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="SOT25">
+<description>&lt;b&gt;Small Outline Transistor&lt;/b&gt;&lt;p&gt;
+TSC [Taiwan Semiconductor Company, Ltd]&lt;br&gt;
+Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
+<wire x1="1.422" y1="0.785" x2="1.422" y2="-0.785" width="0.1524" layer="21"/>
+<wire x1="1.422" y1="-0.785" x2="-1.422" y2="-0.785" width="0.1524" layer="51"/>
+<wire x1="-1.422" y1="-0.785" x2="-1.422" y2="0.785" width="0.1524" layer="21"/>
+<wire x1="-1.422" y1="0.785" x2="1.422" y2="0.785" width="0.1524" layer="51"/>
+<wire x1="-0.522" y1="0.785" x2="0.522" y2="0.785" width="0.1524" layer="21"/>
+<wire x1="-0.428" y1="-0.785" x2="-0.522" y2="-0.785" width="0.1524" layer="21"/>
+<wire x1="0.522" y1="-0.785" x2="0.428" y2="-0.785" width="0.1524" layer="21"/>
+<wire x1="-1.328" y1="-0.785" x2="-1.422" y2="-0.785" width="0.1524" layer="21"/>
+<wire x1="1.422" y1="-0.785" x2="1.328" y2="-0.785" width="0.1524" layer="21"/>
+<wire x1="1.328" y1="0.785" x2="1.422" y2="0.785" width="0.1524" layer="21"/>
+<wire x1="-1.422" y1="0.785" x2="-1.328" y2="0.785" width="0.1524" layer="21"/>
+<smd name="1" x="-0.95" y="-1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="2" x="0" y="-1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="3" x="0.95" y="-1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="4" x="0.95" y="1.3" dx="0.55" dy="1.2" layer="1"/>
+<smd name="5" x="-0.95" y="1.3" dx="0.55" dy="1.2" layer="1"/>
+<text x="-1.905" y="1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.905" y="-3.429" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.2" y1="-1.5" x2="-0.7" y2="-0.85" layer="51"/>
+<rectangle x1="-0.25" y1="-1.5" x2="0.25" y2="-0.85" layer="51"/>
+<rectangle x1="0.7" y1="-1.5" x2="1.2" y2="-0.85" layer="51"/>
+<rectangle x1="0.7" y1="0.85" x2="1.2" y2="1.5" layer="51"/>
+<rectangle x1="-1.2" y1="0.85" x2="-0.7" y2="1.5" layer="51"/>
+</package>
+</packages>
+<symbols>
+<symbol name="TS5205">
+<wire x1="-7.62" y1="-7.62" x2="7.62" y2="-7.62" width="0.4064" layer="94"/>
+<wire x1="7.62" y1="-7.62" x2="7.62" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="7.62" y1="7.62" x2="-7.62" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="-7.62" y1="7.62" x2="-7.62" y2="-7.62" width="0.4064" layer="94"/>
+<text x="-7.62" y="8.255" size="1.778" layer="95">&gt;NAME</text>
+<text x="-7.62" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="VIN" x="-10.16" y="5.08" length="short" direction="in"/>
+<pin name="GND" x="-10.16" y="-5.08" length="short" direction="pas"/>
+<pin name="VOUT" x="10.16" y="5.08" length="short" direction="pas" rot="R180"/>
+<pin name="CB" x="10.16" y="-2.54" length="short" direction="in" rot="R180"/>
+<pin name="CE" x="-10.16" y="0" length="short" direction="in"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TS5205" prefix="IC">
+<description>&lt;b&gt;150mA Low Noise LDO Voltage Regulator with Enable&lt;/b&gt;&lt;p&gt;
+TSC [Taiwan Semiconductor Company, Ltd]&lt;br&gt;
+Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
+<gates>
+<gate name="G$1" symbol="TS5205" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOT25">
+<connects>
+<connect gate="G$1" pin="CB" pad="4"/>
+<connect gate="G$1" pin="CE" pad="3"/>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="VIN" pad="1"/>
+<connect gate="G$1" pin="VOUT" pad="5"/>
+</connects>
+<technologies>
+<technology name=""/>
+<technology name="25"/>
+<technology name="29"/>
+<technology name="30"/>
+<technology name="33"/>
+<technology name="50"/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -12750,6 +12828,17 @@ W = angled&lt;p&gt;
 <part name="GND31" library="supply1" deviceset="GND" device=""/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" deviceset="+5V" device=""/>
+<part name="IC1" library="v-reg" deviceset="TS5205" device="" technology="25" value="LP5907"/>
+<part name="GND32" library="supply1" deviceset="GND" device=""/>
+<part name="C5" library="rcl" deviceset="C-EU" device="C1206" value="1uF"/>
+<part name="GND33" library="supply1" deviceset="GND" device=""/>
+<part name="C4" library="rcl" deviceset="C-EU" device="C1206" value="1uF"/>
+<part name="GND34" library="supply1" deviceset="GND" device=""/>
+<part name="P+3" library="supply1" deviceset="+5V" device=""/>
+<part name="C6" library="rcl" deviceset="C-EU" device="C1206" value="10uF"/>
+<part name="C19" library="rcl" deviceset="C-EU" device="C1206" value="100nF"/>
+<part name="AGND2" library="supply2" deviceset="AGND" device="" value="AGND"/>
+<part name="AGND10" library="supply2" deviceset="AGND" device="" value="AGND"/>
 </parts>
 <sheets>
 <sheet>
@@ -13067,6 +13156,24 @@ W = angled&lt;p&gt;
 <attribute name="VALUE" x="84.455" y="280.035" size="1.27" layer="96"/>
 </instance>
 <instance part="P+1" gate="1" x="-20.32" y="238.76" rot="R180"/>
+<instance part="IC1" gate="G$1" x="271.78" y="332.74"/>
+<instance part="GND32" gate="1" x="259.08" y="325.12"/>
+<instance part="C5" gate="G$1" x="289.56" y="335.28"/>
+<instance part="GND33" gate="1" x="289.56" y="325.12"/>
+<instance part="C4" gate="G$1" x="251.46" y="337.82" rot="R90"/>
+<instance part="GND34" gate="1" x="246.38" y="337.82" rot="R270"/>
+<instance part="P+3" gate="1" x="256.54" y="340.36"/>
+<instance part="C6" gate="G$1" x="269.24" y="274.32" rot="R180"/>
+<instance part="C19" gate="G$1" x="274.32" y="274.32" smashed="yes" rot="R180">
+<attribute name="NAME" x="272.796" y="273.939" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="272.796" y="279.019" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="AGND2" gate="G$1" x="269.24" y="269.24" smashed="yes">
+<attribute name="VALUE" x="267.335" y="267.335" size="1.27" layer="96"/>
+</instance>
+<instance part="AGND10" gate="G$1" x="274.32" y="269.24" smashed="yes">
+<attribute name="VALUE" x="272.415" y="267.335" size="1.27" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -13094,6 +13201,16 @@ W = angled&lt;p&gt;
 <pinref part="5V-FAN" gate="G$1" pin="2"/>
 <wire x1="-2.54" y1="241.3" x2="-20.32" y2="241.3" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="+5V"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="VIN"/>
+<wire x1="261.62" y1="337.82" x2="256.54" y2="337.82" width="0.1524" layer="91"/>
+<junction x="256.54" y="337.82"/>
+<pinref part="C4" gate="G$1" pin="2"/>
+<wire x1="256.54" y1="337.82" x2="256.54" y2="332.74" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="CE"/>
+<wire x1="256.54" y1="332.74" x2="261.62" y2="332.74" width="0.1524" layer="91"/>
+<pinref part="P+3" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="GND" class="1">
@@ -13399,6 +13516,23 @@ W = angled&lt;p&gt;
 <pinref part="U$15" gate="G$1" pin="VSS"/>
 <wire x1="81.28" y1="284.48" x2="86.36" y2="284.48" width="0.1524" layer="91"/>
 <pinref part="GND9" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C5" gate="G$1" pin="2"/>
+<pinref part="GND33" gate="1" pin="GND"/>
+<wire x1="289.56" y1="330.2" x2="289.56" y2="327.66" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="CB"/>
+<wire x1="281.94" y1="330.2" x2="289.56" y2="330.2" width="0.1524" layer="91"/>
+<junction x="289.56" y="330.2"/>
+</segment>
+<segment>
+<pinref part="C4" gate="G$1" pin="1"/>
+<pinref part="GND34" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="GND"/>
+<pinref part="GND32" gate="1" pin="GND"/>
+<wire x1="259.08" y1="327.66" x2="261.62" y2="327.66" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SCK" class="0">
@@ -14046,12 +14180,17 @@ W = angled&lt;p&gt;
 <wire x1="261.62" y1="279.4" x2="266.7" y2="279.4" width="0.1524" layer="91"/>
 <wire x1="266.7" y1="279.4" x2="266.7" y2="287.02" width="0.1524" layer="91"/>
 <junction x="261.62" y="279.4"/>
-<wire x1="266.7" y1="279.4" x2="274.32" y2="279.4" width="0.1524" layer="91"/>
+<wire x1="266.7" y1="279.4" x2="269.24" y2="279.4" width="0.1524" layer="91"/>
+<wire x1="269.24" y1="279.4" x2="274.32" y2="279.4" width="0.1524" layer="91"/>
 <wire x1="274.32" y1="279.4" x2="274.32" y2="299.72" width="0.1524" layer="91"/>
 <junction x="266.7" y="279.4"/>
 <pinref part="U$14" gate="G$1" pin="AVDD"/>
 <wire x1="274.32" y1="299.72" x2="261.62" y2="299.72" width="0.1524" layer="91"/>
 <pinref part="SUPPLY2" gate="G$1" pin="+5V/1"/>
+<pinref part="C6" gate="G$1" pin="2"/>
+<junction x="269.24" y="279.4"/>
+<pinref part="C19" gate="G$1" pin="2"/>
+<junction x="274.32" y="279.4"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="VCC"/>
@@ -14260,6 +14399,14 @@ W = angled&lt;p&gt;
 <pinref part="AGND9" gate="G$1" pin="AGND"/>
 <wire x1="106.68" y1="279.4" x2="101.6" y2="279.4" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="C6" gate="G$1" pin="1"/>
+<pinref part="AGND2" gate="G$1" pin="AGND"/>
+</segment>
+<segment>
+<pinref part="C19" gate="G$1" pin="1"/>
+<pinref part="AGND10" gate="G$1" pin="AGND"/>
+</segment>
 </net>
 <net name="N$14" class="3">
 <segment>
@@ -14405,6 +14552,12 @@ W = angled&lt;p&gt;
 <wire x1="223.52" y1="299.72" x2="213.36" y2="299.72" width="0.1524" layer="91"/>
 <junction x="223.52" y="299.72"/>
 <label x="213.36" y="299.72" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="VOUT"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="281.94" y1="337.82" x2="289.56" y2="337.82" width="0.1524" layer="91"/>
+<label x="287.02" y="337.82" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$19" class="0">
