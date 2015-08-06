@@ -12655,7 +12655,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 </class>
 </classes>
 <parts>
-<part name="GND19" library="supply1" deviceset="GND" device=""/>
 <part name="SENSOR" library="lpatiny" deviceset="RJ12" device="STRAIGHT" value="RJ12"/>
 <part name="R32" library="rcl" deviceset="R-EU_" device="R0805" value="14.3k"/>
 <part name="P+12" library="supply1" deviceset="+12V" device=""/>
@@ -12720,9 +12719,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <part name="BLINK" library="adafruit" deviceset="LED" device="CHIPLED_1206" value="GREEN"/>
 <part name="RL6" library="rcl" deviceset="R-EU_" device="R0805" value="1K"/>
 <part name="RL8" library="rcl" deviceset="R-EU_" device="R0805" value="1K"/>
-<part name="U$2" library="lpatiny" deviceset="STARGND" device=""/>
-<part name="AGND" library="supply2" deviceset="AGND" device="" value="AGND"/>
-<part name="DGND" library="supply2" deviceset="DGND" device="" value="DGND"/>
 <part name="DGND1" library="supply2" deviceset="DGND" device="" value="DGND"/>
 <part name="DGND2" library="supply2" deviceset="DGND" device="" value="DGND"/>
 <part name="DGND3" library="supply2" deviceset="DGND" device="" value="DGND"/>
@@ -12805,10 +12801,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <part name="U$5" library="lpatiny" deviceset="STARGND" device=""/>
 <part name="AGND7" library="supply2" deviceset="AGND" device="" value="AGND"/>
 <part name="DGND10" library="supply2" deviceset="DGND" device="" value="DGND"/>
-<part name="GND15" library="supply1" deviceset="GND" device=""/>
-<part name="U$20" library="lpatiny" deviceset="STARGND" device=""/>
-<part name="AGND8" library="supply2" deviceset="AGND" device="" value="AGND"/>
-<part name="DGND14" library="supply2" deviceset="DGND" device="" value="DGND"/>
 <part name="R1" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
 <part name="AGND9" library="supply2" deviceset="AGND" device="" value="AGND"/>
 <part name="5V-FAN" library="con-lstb" deviceset="MA03-1" device=""/>
@@ -12839,6 +12831,7 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <part name="C19" library="rcl" deviceset="C-EU" device="C1206" value="100nF"/>
 <part name="AGND2" library="supply2" deviceset="AGND" device="" value="AGND"/>
 <part name="AGND10" library="supply2" deviceset="AGND" device="" value="AGND"/>
+<part name="GND15" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -12899,11 +12892,8 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <text x="-53.34" y="259.08" size="5.08" layer="91">Peltier  5V fan</text>
 </plain>
 <instances>
-<instance part="GND19" gate="1" x="-109.22" y="299.72" smashed="yes">
-<attribute name="VALUE" x="-111.125" y="297.815" size="1.27" layer="96"/>
-</instance>
 <instance part="SENSOR" gate="G$1" x="91.44" y="312.42" rot="R90"/>
-<instance part="R32" gate="G$1" x="91.44" y="302.26" rot="R90"/>
+<instance part="R32" gate="G$1" x="91.44" y="299.72" rot="R90"/>
 <instance part="P+12" gate="1" x="76.2" y="302.26" rot="R90"/>
 <instance part="PIEZO" gate="G$1" x="185.42" y="292.1" rot="R180"/>
 <instance part="P+15" gate="1" x="195.58" y="279.4" rot="R180"/>
@@ -12980,13 +12970,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <instance part="BLINK" gate="G$1" x="7.62" y="281.94" rot="R180"/>
 <instance part="RL6" gate="G$1" x="-25.4" y="182.88" rot="MR180"/>
 <instance part="RL8" gate="G$1" x="-25.4" y="162.56" rot="MR180"/>
-<instance part="U$2" gate="G$1" x="-83.82" y="307.34"/>
-<instance part="AGND" gate="G$1" x="-63.5" y="309.88" smashed="yes" rot="R90">
-<attribute name="VALUE" x="-61.595" y="307.975" size="1.27" layer="96" rot="R90"/>
-</instance>
-<instance part="DGND" gate="G$1" x="-63.5" y="304.8" smashed="yes" rot="R90">
-<attribute name="VALUE" x="-61.595" y="302.895" size="1.27" layer="96" rot="R90"/>
-</instance>
 <instance part="DGND1" gate="G$1" x="-5.08" y="177.8" smashed="yes">
 <attribute name="VALUE" x="-6.985" y="175.895" size="1.27" layer="96"/>
 </instance>
@@ -13079,8 +13062,8 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <instance part="AGND4" gate="G$1" x="193.04" y="307.34" smashed="yes" rot="R90">
 <attribute name="VALUE" x="194.945" y="305.435" size="1.27" layer="96" rot="R90"/>
 </instance>
-<instance part="AGND5" gate="G$1" x="109.22" y="307.34" smashed="yes" rot="R90">
-<attribute name="VALUE" x="111.125" y="305.435" size="1.27" layer="96" rot="R90"/>
+<instance part="AGND5" gate="G$1" x="106.68" y="307.34" smashed="yes" rot="R90">
+<attribute name="VALUE" x="108.585" y="305.435" size="1.27" layer="96" rot="R90"/>
 </instance>
 <instance part="U$1" gate="G$1" x="-104.14" y="226.06"/>
 <instance part="GND3" gate="1" x="-121.92" y="241.3" rot="R180"/>
@@ -13114,16 +13097,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 </instance>
 <instance part="DGND10" gate="G$1" x="-63.5" y="292.1" smashed="yes" rot="R90">
 <attribute name="VALUE" x="-61.595" y="290.195" size="1.27" layer="96" rot="R90"/>
-</instance>
-<instance part="GND15" gate="1" x="-109.22" y="314.96" smashed="yes">
-<attribute name="VALUE" x="-111.125" y="313.055" size="1.27" layer="96"/>
-</instance>
-<instance part="U$20" gate="G$1" x="-83.82" y="322.58"/>
-<instance part="AGND8" gate="G$1" x="-63.5" y="325.12" smashed="yes" rot="R90">
-<attribute name="VALUE" x="-61.595" y="323.215" size="1.27" layer="96" rot="R90"/>
-</instance>
-<instance part="DGND14" gate="G$1" x="-63.5" y="320.04" smashed="yes" rot="R90">
-<attribute name="VALUE" x="-61.595" y="318.135" size="1.27" layer="96" rot="R90"/>
 </instance>
 <instance part="R1" gate="G$1" x="96.52" y="279.4" rot="R180"/>
 <instance part="AGND9" gate="G$1" x="109.22" y="279.4" smashed="yes" rot="R90">
@@ -13174,6 +13147,9 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <instance part="AGND10" gate="G$1" x="274.32" y="269.24" smashed="yes">
 <attribute name="VALUE" x="272.415" y="267.335" size="1.27" layer="96"/>
 </instance>
+<instance part="GND15" gate="1" x="50.8" y="271.78" smashed="yes">
+<attribute name="VALUE" x="48.895" y="269.875" size="1.27" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -13214,22 +13190,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 </segment>
 </net>
 <net name="GND" class="1">
-<segment>
-<wire x1="-109.22" y1="307.34" x2="-109.22" y2="302.26" width="0.1524" layer="91"/>
-<pinref part="GND19" gate="1" pin="GND"/>
-<pinref part="U$2" gate="G$1" pin="GND"/>
-<wire x1="-88.9" y1="307.34" x2="-96.52" y2="307.34" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="307.34" x2="-109.22" y2="307.34" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="307.34" x2="-96.52" y2="299.72" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="DGND"/>
-<wire x1="-76.2" y1="304.8" x2="-71.12" y2="304.8" width="0.1524" layer="91"/>
-<pinref part="DGND" gate="G$1" pin="DGND"/>
-<wire x1="-71.12" y1="304.8" x2="-66.04" y2="304.8" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="299.72" x2="-71.12" y2="299.72" width="0.1524" layer="91"/>
-<wire x1="-71.12" y1="299.72" x2="-71.12" y2="304.8" width="0.1524" layer="91"/>
-<junction x="-96.52" y="307.34"/>
-<junction x="-71.12" y="304.8"/>
-</segment>
 <segment>
 <pinref part="X4" gate="G$1" pin="5"/>
 <label x="231.14" y="243.84" size="1.778" layer="95"/>
@@ -13476,22 +13436,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <junction x="-71.12" y="292.1"/>
 </segment>
 <segment>
-<wire x1="-109.22" y1="322.58" x2="-109.22" y2="317.5" width="0.1524" layer="91"/>
-<pinref part="GND15" gate="1" pin="GND"/>
-<pinref part="U$20" gate="G$1" pin="GND"/>
-<wire x1="-88.9" y1="322.58" x2="-96.52" y2="322.58" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="322.58" x2="-109.22" y2="322.58" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="322.58" x2="-96.52" y2="314.96" width="0.1524" layer="91"/>
-<pinref part="U$20" gate="G$1" pin="DGND"/>
-<wire x1="-76.2" y1="320.04" x2="-71.12" y2="320.04" width="0.1524" layer="91"/>
-<pinref part="DGND14" gate="G$1" pin="DGND"/>
-<wire x1="-71.12" y1="320.04" x2="-66.04" y2="320.04" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="314.96" x2="-71.12" y2="314.96" width="0.1524" layer="91"/>
-<wire x1="-71.12" y1="314.96" x2="-71.12" y2="320.04" width="0.1524" layer="91"/>
-<junction x="-96.52" y="322.58"/>
-<junction x="-71.12" y="320.04"/>
-</segment>
-<segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <wire x1="-88.9" y1="246.38" x2="-88.9" y2="248.92" width="0.1524" layer="91"/>
 <pinref part="GND14" gate="1" pin="GND"/>
@@ -13533,6 +13477,11 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <pinref part="IC1" gate="G$1" pin="GND"/>
 <pinref part="GND32" gate="1" pin="GND"/>
 <wire x1="259.08" y1="327.66" x2="261.62" y2="327.66" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U$15" gate="G$1" pin="VIN-"/>
+<pinref part="GND15" gate="1" pin="GND"/>
+<wire x1="50.8" y1="279.4" x2="50.8" y2="274.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SCK" class="0">
@@ -13693,7 +13642,7 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <label x="91.44" y="289.56" size="1.778" layer="95" rot="R90"/>
 <pinref part="U$15" gate="G$1" pin="VIN+"/>
 <wire x1="81.28" y1="279.4" x2="91.44" y2="279.4" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="279.4" x2="91.44" y2="297.18" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="279.4" x2="91.44" y2="294.64" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
 <junction x="91.44" y="279.4"/>
 </segment>
@@ -13892,7 +13841,7 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <segment>
 <pinref part="R32" gate="G$1" pin="2"/>
 <pinref part="SENSOR" gate="G$1" pin="3"/>
-<wire x1="91.44" y1="307.34" x2="91.44" y2="309.88" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="304.8" x2="91.44" y2="309.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$75" class="0">
@@ -14345,11 +14294,6 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 </net>
 <net name="AGND" class="0">
 <segment>
-<pinref part="U$2" gate="G$1" pin="AGND"/>
-<wire x1="-76.2" y1="309.88" x2="-66.04" y2="309.88" width="0.1524" layer="91"/>
-<pinref part="AGND" gate="G$1" pin="AGND"/>
-</segment>
-<segment>
 <pinref part="C11" gate="G$1" pin="2"/>
 <wire x1="35.56" y1="119.38" x2="35.56" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="AGND1" gate="G$1" pin="AGND"/>
@@ -14373,6 +14317,10 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <junction x="190.5" y="299.72"/>
 <wire x1="190.5" y1="299.72" x2="190.5" y2="307.34" width="0.1524" layer="91"/>
 <pinref part="AGND4" gate="G$1" pin="AGND"/>
+<pinref part="PIEZO" gate="G$1" pin="2"/>
+<wire x1="187.96" y1="289.56" x2="190.5" y2="289.56" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="289.56" x2="190.5" y2="294.64" width="0.1524" layer="91"/>
+<junction x="190.5" y="294.64"/>
 </segment>
 <segment>
 <pinref part="SENSOR" gate="G$1" pin="6"/>
@@ -14381,18 +14329,17 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 <wire x1="93.98" y1="309.88" x2="93.98" y2="307.34" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="307.34" x2="99.06" y2="307.34" width="0.1524" layer="91"/>
 <junction x="99.06" y="307.34"/>
-<wire x1="99.06" y1="307.34" x2="106.68" y2="307.34" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="307.34" x2="104.14" y2="307.34" width="0.1524" layer="91"/>
 <pinref part="AGND5" gate="G$1" pin="AGND"/>
+<pinref part="SENSOR" gate="G$1" pin="2"/>
+<wire x1="93.98" y1="307.34" x2="88.9" y2="307.34" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="307.34" x2="88.9" y2="309.88" width="0.1524" layer="91"/>
+<junction x="93.98" y="307.34"/>
 </segment>
 <segment>
 <pinref part="U$5" gate="G$1" pin="AGND"/>
 <wire x1="-76.2" y1="297.18" x2="-66.04" y2="297.18" width="0.1524" layer="91"/>
 <pinref part="AGND7" gate="G$1" pin="AGND"/>
-</segment>
-<segment>
-<pinref part="U$20" gate="G$1" pin="AGND"/>
-<wire x1="-76.2" y1="325.12" x2="-66.04" y2="325.12" width="0.1524" layer="91"/>
-<pinref part="AGND8" gate="G$1" pin="AGND"/>
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="1"/>
@@ -14586,6 +14533,59 @@ Source: http://www.taiwansemi.com .. 5205_0409c.pdf</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="208,1,35.56,109.22,AGND,sup,,,,"/>
+<approved hash="208,1,68.58,157.48,AGND,sup,,,,"/>
+<approved hash="208,1,215.9,294.64,AGND,sup,,,,"/>
+<approved hash="208,1,190.5,307.34,AGND,sup,,,,"/>
+<approved hash="208,1,106.68,307.34,AGND,sup,,,,"/>
+<approved hash="208,1,-76.2,297.18,AGND,out,,,,"/>
+<approved hash="208,1,-66.04,297.18,AGND,sup,,,,"/>
+<approved hash="208,1,106.68,279.4,AGND,sup,,,,"/>
+<approved hash="208,1,269.24,271.78,AGND,sup,,,,"/>
+<approved hash="208,1,274.32,271.78,AGND,sup,,,,"/>
+<approved hash="208,1,149.86,274.32,GND,sup,,,,"/>
+<approved hash="208,1,226.06,106.68,GND,sup,,,,"/>
+<approved hash="208,1,218.44,111.76,GND,sup,,,,"/>
+<approved hash="208,1,-111.76,167.64,GND,sup,,,,"/>
+<approved hash="208,1,5.08,309.88,GND,sup,,,,"/>
+<approved hash="208,1,-5.08,180.34,GND,sup,,,,"/>
+<approved hash="208,1,-5.08,160.02,GND,sup,,,,"/>
+<approved hash="208,1,20.32,287.02,GND,sup,,,,"/>
+<approved hash="208,1,86.36,241.3,GND,sup,,,,"/>
+<approved hash="208,1,129.54,226.06,GND,sup,,,,"/>
+<approved hash="208,1,60.96,170.18,GND,sup,,,,"/>
+<approved hash="208,1,60.96,132.08,GND,sup,,,,"/>
+<approved hash="208,1,48.26,142.24,GND,sup,,,,"/>
+<approved hash="208,1,96.52,116.84,GND,sup,,,,"/>
+<approved hash="208,1,182.88,162.56,GND,sup,,,,"/>
+<approved hash="208,1,200.66,167.64,GND,sup,,,,"/>
+<approved hash="208,1,269.24,170.18,GND,sup,,,,"/>
+<approved hash="208,1,266.7,182.88,GND,sup,,,,"/>
+<approved hash="208,1,-30.48,312.42,GND,sup,,,,"/>
+<approved hash="208,1,-76.2,167.64,GND,sup,,,,"/>
+<approved hash="208,1,-5.08,139.7,GND,sup,,,,"/>
+<approved hash="208,1,-5.08,119.38,GND,sup,,,,"/>
+<approved hash="208,1,-109.22,101.6,GND,sup,,,,"/>
+<approved hash="208,1,-73.66,101.6,GND,sup,,,,"/>
+<approved hash="208,1,284.48,274.32,GND,sup,,,,"/>
+<approved hash="208,1,289.56,281.94,GND,sup,,,,"/>
+<approved hash="208,1,-121.92,238.76,GND,sup,,,,"/>
+<approved hash="208,1,-127,231.14,GND,sup,,,,"/>
+<approved hash="208,1,43.18,274.32,GND,sup,,,,"/>
+<approved hash="208,1,-109.22,289.56,GND,sup,,,,"/>
+<approved hash="208,1,-88.9,294.64,GND,sup,,,,"/>
+<approved hash="208,1,-76.2,292.1,GND,out,,,,"/>
+<approved hash="208,1,-66.04,292.1,GND,sup,,,,"/>
+<approved hash="208,1,-88.9,248.92,GND,sup,,,,"/>
+<approved hash="208,1,96.52,106.68,GND,sup,,,,"/>
+<approved hash="208,1,-20.32,243.84,GND,sup,,,,"/>
+<approved hash="208,1,86.36,284.48,GND,sup,,,,"/>
+<approved hash="208,1,289.56,327.66,GND,sup,,,,"/>
+<approved hash="208,1,248.92,337.82,GND,sup,,,,"/>
+<approved hash="208,1,259.08,327.66,GND,sup,,,,"/>
+<approved hash="208,1,50.8,274.32,GND,sup,,,,"/>
+</errors>
 </schematic>
 </drawing>
 </eagle>
