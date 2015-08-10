@@ -34,7 +34,7 @@
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
@@ -3293,6 +3293,23 @@ Source: http://www.silabs.com/Support%20Documents/TechnicalDocs/Si1145-46-47.pdf
 <text x="-2.54" y="5.08" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-3.175" y="-0.635" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
+<package name="ICS43-432">
+<description>Low-Noise Microphone with I 2 S Digital Output</description>
+<smd name="WS" x="0.65" y="0.2" dx="0.3" dy="1" layer="1"/>
+<smd name="SCK" x="0" y="0.2" dx="0.3" dy="1" layer="1"/>
+<smd name="SD" x="-0.65" y="0.2" dx="0.3" dy="1" layer="1"/>
+<smd name="LR" x="-0.65" y="-2.35" dx="0.3" dy="1" layer="1"/>
+<smd name="CONFIG" x="0" y="-2.35" dx="0.3" dy="1" layer="1"/>
+<smd name="VDD" x="0.65" y="-2.35" dx="0.3" dy="1" layer="1"/>
+<pad name="GND" x="1.925" y="-1.08" drill="1.15" diameter="1.65"/>
+<hole x="1.925" y="-1.08" drill="1.13"/>
+<wire x1="-1.27" y1="0" x2="-1.27" y2="-2.54" width="0.127" layer="21"/>
+<wire x1="1.27" y1="0.2" x2="3.175" y2="0.2" width="0.127" layer="21"/>
+<wire x1="3.175" y1="0.2" x2="3.175" y2="-2.35" width="0.127" layer="21"/>
+<wire x1="3.175" y1="-2.35" x2="1.27" y2="-2.35" width="0.127" layer="21"/>
+<text x="-1.905" y="-2.54" size="0.6096" layer="25" rot="R90">&gt;NAME</text>
+<text x="3.81" y="0.635" size="0.6096" layer="27" rot="R270">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="MAT-P">
@@ -4534,6 +4551,20 @@ Radial Sensor 4.3V/W</description>
 <pin name="G" x="-7.62" y="2.54" length="middle"/>
 <pin name="D" x="-7.62" y="-2.54" length="middle"/>
 <pin name="S" x="7.62" y="0" length="middle" rot="R180"/>
+</symbol>
+<symbol name="ICS-43432">
+<description>Low-Noise Microphone with I 2 S Digital Output</description>
+<wire x1="-10.16" y1="-10.16" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="10.16" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
+<pin name="GND" x="15.24" y="7.62" length="middle" rot="R180"/>
+<pin name="WS" x="-15.24" y="2.54" length="middle"/>
+<pin name="SCK" x="-15.24" y="-2.54" length="middle"/>
+<pin name="SD" x="-15.24" y="-7.62" length="middle"/>
+<pin name="LR" x="15.24" y="-7.62" length="middle" rot="R180"/>
+<pin name="CONFIG" x="15.24" y="-2.54" length="middle" rot="R180"/>
+<pin name="VDD" x="15.24" y="2.54" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -6272,6 +6303,28 @@ Radial Sensor 4.3V/W</description>
 <connect gate="G$1" pin="D" pad="D"/>
 <connect gate="G$1" pin="G" pad="G"/>
 <connect gate="G$1" pin="S" pad="S"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ICS-43432">
+<description>Low-Noise Microphone with I 2 S Digital Output</description>
+<gates>
+<gate name="G$1" symbol="ICS-43432" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="ICS43-432">
+<connects>
+<connect gate="G$1" pin="CONFIG" pad="CONFIG"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="LR" pad="LR"/>
+<connect gate="G$1" pin="SCK" pad="SCK"/>
+<connect gate="G$1" pin="SD" pad="SD"/>
+<connect gate="G$1" pin="VDD" pad="VDD"/>
+<connect gate="G$1" pin="WS" pad="WS"/>
 </connects>
 <technologies>
 <technology name=""/>
