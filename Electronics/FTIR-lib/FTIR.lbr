@@ -105,6 +105,18 @@
 <text x="-9.525" y="0.635" size="1.27" layer="21" rot="R270">13A MAX</text>
 <text x="-6.985" y="5.715" size="1.016" layer="21" rot="R270">MATE-N-LOK 1-480424-0</text>
 </package>
+<package name="DISSIP_TO247">
+<description>Heat dissipator for TO247, 2 slits package.
+75mm version, also exists in 50 and 25 mm
+http://www.mouser.com/Search/Refine.aspx?Keyword=588-C247&amp;Ns=Pricing|0&amp;FS=True</description>
+<text x="5.08" y="31.75" size="1.27" layer="21" rot="R90">&gt;NAME</text>
+<wire x1="0" y1="75.00111875" x2="9.017" y2="75.00111875" width="0.127" layer="21"/>
+<wire x1="9.017" y1="75.00111875" x2="9.017" y2="0" width="0.127" layer="21"/>
+<wire x1="9.017" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="0" y2="75.00111875" width="0.127" layer="21"/>
+<pad name="P$3" x="2.286" y="72.968" drill="2.54" shape="square"/>
+<pad name="P$4" x="2.286" y="2.032" drill="2.54" shape="square"/>
+</package>
 </packages>
 <symbols>
 <symbol name="DAC1220">
@@ -130,6 +142,16 @@
 <pin name="DNC" x="5.08" y="-30.48" length="middle" rot="R90"/>
 <pin name="DNC1" x="10.16" y="-30.48" length="middle" rot="R90"/>
 <pin name="DNC2" x="15.24" y="-30.48" length="middle" rot="R90"/>
+</symbol>
+<symbol name="DISSP_AUDIO_AOP">
+<description>A heat dissipador for TO247 Power amplifiers</description>
+<text x="-7.112" y="2.54" size="1.27" layer="95" rot="R270">&gt;NAME</text>
+<wire x1="-5.08" y1="15.24" x2="5.08" y2="15.24" width="0.254" layer="94"/>
+<wire x1="5.08" y1="15.24" x2="5.08" y2="-15.24" width="0.254" layer="94"/>
+<wire x1="5.08" y1="-15.24" x2="-5.08" y2="-15.24" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-15.24" x2="-5.08" y2="15.24" width="0.254" layer="94"/>
+<pin name="GND" x="10.16" y="-12.7" length="middle" rot="R180"/>
+<pin name="GND1" x="10.16" y="12.7" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -170,6 +192,22 @@ Digital-to-Analog Converter</description>
 </gates>
 <devices>
 <device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="DISSIP_TO47_75MM">
+<gates>
+<gate name="G$1" symbol="DISSP_AUDIO_AOP" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DISSIP_TO247">
+<connects>
+<connect gate="G$1" pin="GND" pad="P$3"/>
+<connect gate="G$1" pin="GND1" pad="P$4"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>
