@@ -21,12 +21,20 @@
  ******************/
 
 #define TYPE_FTIR  1 
-// THIS SHOULD BE THE ONLY PARAMETER THAT CHANGES !!!!
-//#define TYPE_ZIGBEE_GENERAL     1   // card to control the basic functions: pH, motor, temperature
-//#define TYPE_PRECISE_PID    1
 
-//#define TYPE_OLD_PIN_CONFIG     1   //define this if you use the card with the old pin configuration
-//(old=until integratedBertha v1.0)
+#define DIGITAL_5       5//D5 OC4A  
+#define DIGITAL_6       6//D6 OC4D
+#define DIGITAL_7       7//D7
+#define DIGITAL_8       8//D8 A8
+#define DIGITAL_9       9//D9 OC4B, OC1A, PCINT5
+#define DIGITAL_10      10//D10 A10
+#define DIGITAL_13      13//D13
+
+#define ANALOG_0     18//0
+#define ANALOG_1     19//A1
+#define ANALOG_2     20//A2
+#define ANALOG_3     21//A3
+#define ANALOG_4     22//A4
 
 /**************************************
  * ACTIVE THREAD DEPENDING CARD TYPE
@@ -36,24 +44,28 @@
   #define MODEL_ZIGBEE       //Serial Com on Zigbee antenna SZ05
   #define I2C_EEPROM 80      //I2C EEPROM memory 512k or 1M (m24512)
   
-  #define TEMPERATURE_CTRL 1    //DS18B20+ inputs
+  #define IR_FAN      DIGITAL_5
+  #define IR_SRC      DIGITAL_6
+  #define PUMP_12V    DIGITAL_9
+  
+  #define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
     #define PELTIER_PID  1    //Peltier Cooling Thread
-    #define TEMP_IR        1  //change the analog input here
-    #define TEMP_SINK      2  //change the analog input here
-    #define TEMP_SENSOR    3  //change the analog input here
-    #define TEMP_ALU       4  //change the analog input here
-    #define PELTIER_50     5  //change the digital output here
-    #define PELTIER_75     6  //change the digital output here
+    #define TEMP_IR        ANALOG_1 
+    #define TEMP_SINK      ANALOG_0
+    #define TEMP_SENSOR    ANALOG_2
+    #define TEMP_ALU       ANALOG_3 
+    #define PELTIER_50     DIGITAL_7   //PWM
+    #define PELTIER_75     DIGITAL_10  //PWM
 
   #define IR_SENSE      1
-    #define I2C_IR_INTENSITY  9   //change the digital input here
-    #define IR_INTENSITY      10   //change the analog input here
+    #define I2C_IR_INTENSITY  9   //change the digital input here with the I2 address of the ADC
+    #define IR_INTENSITY      ANALOG_4   
   
-  #define PIEZO_DRV           1     //piezo driver on DAC1220 via SPI
-    #define PIEZO_SELECT      11      //change digital pin
+  #define PIEZO_DRV           1 //piezo driver on DAC1220 via SPI
+    #define PIEZO_SELECT      DITGITAL_8     
 
   #define THR_MONITORING     1  // starts the blinking led and the watch dog counter 
-  #define MONITORING_LED     13
+  #define MONITORING_LED     DIGITAL_13
     
 #endif
 
