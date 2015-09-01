@@ -28,6 +28,16 @@ void printGeneralParameters(Print* output){
   sst.printFlashID(output);
 #endif
 
+#ifdef I2C_EEPROM
+  output->print(F("Log index:"));
+  output->println(entryID);
+#endif
+#ifdef I2C_EEPROM
+  output->print(F("EEPROM ADDR:"));
+  output->println(I2C_EEPROM);
+#endif
+
+
 
 }
 
@@ -60,9 +70,6 @@ void printIP(Print* output, uint8_t* tab, uint8_t s, byte format){
  l : show the log file
  */
 
-
-
-
 void printResult(char* data, Print* output) {
   boolean theEnd=false;
   byte paramCurrent=0; // Which parameter are we defining
@@ -71,7 +78,8 @@ void printResult(char* data, Print* output) {
   char paramValue[MAX_PARAM_VALUE_LENGTH];
   byte paramValuePosition=0;
   byte i=0;
-
+  
+  //if checkReceipt was Ok then proceed
   while (!theEnd) {
     byte inChar=data[i];
     i++;
@@ -81,9 +89,10 @@ void printResult(char* data, Print* output) {
     } 
     else if (inChar=='h') {
       printHelp(output);
-    }
+    }    
+    
     else if (inChar=='i') { // show i2c (wire) information
-#if defined(GAS_CTRL) || defined(I2C_LCD) || defined(PH_CTRL) || defined(I2C_RELAY_FOOD)
+#if defined(GAS_CTRL) || defined(I2C_LCD) || defined(PH_CTRL) || defined(I2C_RELAY_FOOD) || defined(TYPE_SOLAR) // add I2C_EEPROM , CHIPCAP , ...
       wireInfo(output); 
 #else  //not elsif !!
       noThread(output);
@@ -111,7 +120,7 @@ void printResult(char* data, Print* output) {
       printFreeMemory(output);
     } 
     else if (inChar==',') { // store value and increment
-      if (paramCurrent>0) {
+      if (paramCurrent>0 && (eeprom_read_word((uint16_t*)LOCKER)!=0)) {
         if (paramValuePosition>0) {
           setAndSaveParameter(paramCurrent-1,atoi(paramValue));
         } 
@@ -128,7 +137,7 @@ void printResult(char* data, Print* output) {
     else if (theEnd) {
       // this is a carriage return;
       if (paramCurrent>0) {
-        if (paramValuePosition>0) {
+        if (paramValuePosition>0 && (eeprom_read_word((uint16_t*)LOCKER)!=0)) {
           setAndSaveParameter(paramCurrent-1,atoi(paramValue));
         } 
         else {
@@ -143,51 +152,92 @@ void printResult(char* data, Print* output) {
           printCompactParameters(output);
         } 
       }  
-#ifdef THR_LINEAR_LOGS
+      
+    //Lock mode for Zigbee communication safety
+    else if (data[0]=='k') {
+     if (paramValuePosition>0) {
+       if (atol(paramValue)==0000){ 
+         eeprom_write_word((uint16_t*) LOCKER,0);
+         output->println("Locked");  
+       }      
+       else if(atol(paramValue)==1111){
+         eeprom_write_word((uint16_t*) LOCKER,1);
+         output->println("UnLocked");     
+       } 
+     }
+     else output->println(F("To lock enter k0000"));
+    }
+          
+      
+      
+#ifdef THR_LINEAR_LOGS                    
       else if (data[0]=='d') {
-        if (paramValuePosition>0) {
+        if (paramValuePosition>0 && (eeprom_read_word((uint16_t*)LOCKER)!=0)) {
           if (atol(paramValue)==1234) {
             validateFlash(output);
           }
         } 
         else {
-          output->println(F("To format flash enter d1234"));
+          output->println(F("Format enter d1234"));
         }
       }
 #endif
+
+
+#ifdef I2C_EEPROM                   
+      else if (data[0]=='d') {
+        if (paramValuePosition>0 && (eeprom_read_word((uint16_t*)LOCKER)!=0)) {
+          if (atol(paramValue)==1234) {
+
+              output->println("Burn memory");    
+              i2c_eeprom_init_erase(I2C_EEPROM);      
+          }
+        } 
+        else {
+          output->println(F("Format EEPROM enter d1234"));
+        }
+      }
+#endif
+
       else if (data[0]=='e') {
         if (paramValuePosition>0) {
-          setTime(atol(paramValue));
+          //safety feature when zigbee communication fails
+          if((atol(paramValue)< MAX_EPOCH)&&(atol(paramValue)> MIN_EPOCH)){
+            //output->println("epoch reset");
+            setTime(atol(paramValue));
+          }
+          else
+            output->println("bad epoch");
         } 
         else {
           output->println(now());
         }
       }
       else if (data[0]=='l') {
-#ifdef THR_LINEAR_LOGS
+#if  defined(THR_LINEAR_LOGS) || defined(I2C_EEPROM)
         if (paramValuePosition>0) {
           printLogN(output,atol(paramValue));
         } 
         else {
           printLastLog(output);
-        }
+        }        
 #else
         noThread(output);
 #endif
       }
       else if (data[0]=='r') {
-        if (paramValuePosition>0) {
+        if (paramValuePosition>0 && (eeprom_read_word((uint16_t*)LOCKER)!=0)) {
           if (atol(paramValue)==1234) {
             resetParameters();
             output->println(F("Reset done"));
           }
         } 
         else {
-          output->println(F("To reset enter r1234"));
+          Serial.println(F("To reset enter r1234"));
         }
       }
       else if (data[0]=='q') {
-        if (paramValuePosition>0) {
+        if (paramValuePosition>0 && (eeprom_read_word((uint16_t*)LOCKER)!=0)) {
           setQualifier(atoi(paramValue));
         } 
         else {
@@ -196,7 +246,12 @@ void printResult(char* data, Print* output) {
         }
       }  
       else if (data[0]=='m') {
-#ifdef THR_LINEAR_LOGS
+#if  defined(THR_LINEAR_LOGS) || defined(I2C_EEPROM)
+
+        #ifdef I2C_EEPROM
+        uint32_t nextEntryID = entryID;                // clean the Logger_I2C so we don't need that anymore
+        #endif
+        
         if (paramValuePosition>0) {
           long currentValueLong=atol(paramValue);
           if (( currentValueLong - nextEntryID ) < 0) {
@@ -218,8 +273,12 @@ void printResult(char* data, Print* output) {
         } 
         else {
           // we will get the first and the last log ID
-          output->println(nextEntryID-1);
+          if(nextEntryID > 0)
+            Serial.println(nextEntryID-1);
+          else
+            Serial.println(0);
         }
+
 #else
         noThread(output);
 #endif
@@ -250,8 +309,6 @@ void printResult(char* data, Print* output) {
 
 void printHelp(Print* output) {
   //return the menu
-  
-#ifndef TEMP_PID_COLD  
   output->println(F("(c)ompact settings"));
 #ifdef THR_LINEAR_LOGS
   output->println(F("(d)elete flash"));
@@ -269,21 +326,6 @@ void printHelp(Print* output) {
   output->println(F("(s)ettings"));
 #ifdef EEPROM_DUMP
   output->println(F("(z) eeprom"));
-#endif
-
-#endif
-
-#ifdef TEMP_PID_COLD
-  output->println(F("(A) Cold temp"));
-  output->println(F("(B) Hot temp"));
-  output->println(F("(C) Sample temp"));
-  output->println(F("(AA) Target temp (>=10C <80C)"));
-  output->println(F("(AB) Max Temp"));
-  output->println(F("(AC) Windows time 2000ms COOL 5000ms hot"));
-  output->println(F("(AD) Min temp"));
-  output->println(F("(AE) Max absolute temp"));
-  output->println(F("(AF) Status 0=heating 1=cooling 2=ambient reg"));
-  output->println(F("(AG) Approx ambient temp (user set)"));
 #endif
 }
 
@@ -320,6 +362,7 @@ uint8_t toHex(Print* output, long value) {
   checkDigit^=toHex(output, (int)(value>>0&65535));
   return checkDigit;
 }
+
 
 
 

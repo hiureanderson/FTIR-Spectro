@@ -22,6 +22,9 @@
 #include <EEPROM.h> // should be removed and based only on avr/eeprom
 #endif
 
+//define Lock byte as last position on the EEPROM
+#define LOCKER EEPROM_MAX_ADDR
+
 
 #define MAX_PARAM 25   // If the MAX_PARAM change you need to change the pointer in the EEPROM
 

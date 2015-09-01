@@ -12,19 +12,31 @@
 #include <wdt.h> //I2C library
 
 #define WRITE_DELAY    0// 4ms wait before next write  
- 
 
-//Choice was made to only log the IR intensity and status 
-#define ENTRY_SIZE_LOGS     8// Each log take 8 bytes
-#define NB_PARAMETERS_LOGS  2
-#define SIZE_MEMORY     65536 // M24512, 512 Kbits = 64Kbytes
-#define NBMAX_LOGS     8192
-#define EntryID_MAX  NBMAX_LOGS-1
+
+//reduced log size for optimized memory use
+#ifndef MODE_MEMORY_SAVE
+ #define ENTRY_SIZE_LOGS     32 // Each log take 32 bytes
+ #define NB_PARAMETERS_LOGS  10
+ #define SIZE_MEMORY     65536 // M24512, 512 Kbits = 64Kbytes
+ #define NBMAX_LOGS     2048
+ #define EntryID_MAX  NBMAX_LOGS-1
+#endif
+ 
+ 
+#ifdef MODE_MEMORY_SAVE
+ #define ENTRY_SIZE_LOGS     16 // Each log take 32 bytes
+ #define NB_PARAMETERS_LOGS  4
+ #define SIZE_MEMORY     65536 // M24512, 512 Kbits = 64Kbytes
+ #define NBMAX_LOGS     4096
+ #define EntryID_MAX  NBMAX_LOGS-1
+#endif 
+ 
 
 //#define DEBUG_FLAG 1
 
 //// Definition of the log sectors in the flash for the logs
-#define DEVICE_ADDRESS         I2C_EEPROM // address of eeprom on the bus i2c
+#define DEVICE_ADDRESS  I2C_EEPROM // address of eeprom on the bus i2c
 #define ADDRESS_BEG_EEPROM     0x0000
 #define ADDRESS_MAX_EEPROM     0xFFFF // address 65535
 
@@ -109,6 +121,15 @@ void  writeLog (uint16_t event_number, uint16_t parameter_value)
       addr_log=((ENTRY_SIZE_LOGS*(entryID % NBMAX_LOGS))+(2*i)+8);                    
       i2c_eeprom_write_check_int(DEVICE_ADDRESS, addr_log, param);
     }
+    
+    //****************************//
+    //    LOGGING THE EVENTs      //
+    //***************************//
+    #ifndef MODE_MEMORY_SAVE
+    // write to EEPROM 2 bytes for EVENT CODE, 2 bytes for EVENT PARAMETER  
+    i2c_eeprom_write_check_int(DEVICE_ADDRESS, ENTRY_SIZE_LOGS*(entryID % NBMAX_LOGS)+ENTRY_SIZE_LOGS-4, event_number);
+    i2c_eeprom_write_check_int(DEVICE_ADDRESS,ENTRY_SIZE_LOGS*(entryID % NBMAX_LOGS)+ENTRY_SIZE_LOGS-2, parameter_value); 
+    #endif
     
     busy_flag=false;
     entryID++;  
@@ -319,7 +340,7 @@ void i2c_eeprom_write_check_int( int deviceaddress, unsigned int eeaddress, int 
   do{
     i2c_eeprom_write_int(deviceaddress, eeaddress, data);
     //placed here to let time between write and read (3ms causes bug)
-    nilThdSleepMilliseconds(5); 
+    nilThdSleepMilliseconds(7); 
     written = i2c_eeprom_read_int(deviceaddress, eeaddress); 
     i++;
   }

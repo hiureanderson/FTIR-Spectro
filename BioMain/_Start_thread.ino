@@ -57,11 +57,6 @@ NIL_THREADS_TABLE_ENTRY(NULL, ThreadI2C_EEPROM, NULL, waThreadI2C_EEPROM, sizeof
 #endif
 
 
-#ifdef THR_LINEAR_LOGS
-NIL_THREADS_TABLE_ENTRY(NULL, ThreadLogger, NULL, waThreadLogger, sizeof(waThreadLogger))
-#endif
-
-
 #ifdef TEMPERATURE_CTRL
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadTemp, NULL, waThreadTemp, sizeof(waThreadTemp))   
 #ifdef PELTIER_PID  
@@ -74,7 +69,8 @@ NIL_THREADS_TABLE_ENTRY(NULL, Thread_Peltier, NULL, waThread_Peltier, sizeof(waT
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadSerial, NULL, waThreadSerial, sizeof(waThreadSerial))
 #endif
 
-#if defined(I2C_LCD)
+
+#if defined(I2_EEPROM)
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadWire, NULL, waThreadWire, sizeof(waThreadWire))
 #endif
 

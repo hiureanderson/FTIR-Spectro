@@ -48,7 +48,7 @@
   #define IR_SRC      DIGITAL_6
   #define PUMP_12V    DIGITAL_9
   
-  #define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
+//  #define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
     #define PELTIER_PID  1    //Peltier Cooling Thread
     #define TEMP_IR        ANALOG_1 
     #define TEMP_SINK      ANALOG_0
@@ -57,11 +57,11 @@
     #define PELTIER_50     DIGITAL_7   //PWM
     #define PELTIER_75     DIGITAL_10  //PWM
 
-  #define IR_SENSE      1
+//  #define IR_SENSE      1
     #define I2C_IR_INTENSITY  9   //change the digital input here with the I2 address of the ADC
     #define IR_INTENSITY      ANALOG_4   
   
-  #define PIEZO_DRV           1 //piezo driver on DAC1220 via SPI
+//  #define PIEZO_DRV           1 //piezo driver on DAC1220 via SPI
     #define PIEZO_SELECT      DITGITAL_8     
 
   #define THR_MONITORING     1  // starts the blinking led and the watch dog counter 
@@ -128,9 +128,10 @@
 /*********
  * Autoreboot parameters
  *********/
+#define MAX_EPOCH  (long int) 1500000000  //epoch cannot be forced externally  after  Fri, 14 Jul 2017 02:40:00 GMT
+#define MIN_EPOCH  (long int) 1400000000  //epoch cannot be forced externally  before Tue, 13 May 2014 16:53:20 GMT
 #define AUTOREBOOT 36000 // we will reboot automatically every 1h ... bad trick to prevent some crash problems of ethernet ...
 uint16_t autoreboot=0;
-
 /*********
  * SETUP
  *********/
@@ -147,5 +148,15 @@ void setup() {
 }
 
 void loop() {
+  
+  delay(2000);
+  pinMode(IR_FAN,OUTPUT);
+  digitalWrite(IR_FAN,HIGH);  
+  delay(3000);
+  pinMode(IR_SRC,OUTPUT);
+  digitalWrite(IR_SRC,HIGH);
+  delay(2000);
+    pinMode(PUMP_12V ,OUTPUT);
+  digitalWrite(PUMP_12V ,HIGH);
 
 }
