@@ -35,7 +35,6 @@ NIL_WORKING_AREA(waThreadTemp, 80);  // should be 50 without Serial.println
 NIL_THREAD(ThreadTemp, arg) {
   nilThdSleepMilliseconds(200);
 
-#ifdef TEMPERATURE_CTRL
 
 #ifdef TEMP_IR
   OneWire oneWire1(TEMP_IR);
@@ -57,8 +56,6 @@ NIL_THREAD(ThreadTemp, arg) {
   byte errorTempAlu = false;
 #endif
 
-#endif
-
   while(true){
 #ifdef TEMP_IR
     getTemperature(oneWire1, PARAM_TEMP_IR, 0, EVENT_TEMP_IR_FAILED, EVENT_TEMP_IR_RECOVER);
@@ -69,11 +66,11 @@ NIL_THREAD(ThreadTemp, arg) {
 #endif
 
 #ifdef TEMP_SENSOR
-    getTemperature(oneWire3, PARAM_TEMP_SENSOR, 1, EVENT_TEMP_SENSOR_FAILED, EVENT_TEMP_SENSOR_RECOVER);
+    getTemperature(oneWire3, PARAM_TEMP_SENSOR, 2, EVENT_TEMP_SENSOR_FAILED, EVENT_TEMP_SENSOR_RECOVER);
 #endif
 
 #ifdef TEMP_ALU
-    getTemperature(oneWire4, PARAM_TEMP_ALU, 2, EVENT_TEMP_ALU_FAILED, EVENT_TEMP_ALU_RECOVER);
+    getTemperature(oneWire4, PARAM_TEMP_ALU, 3, EVENT_TEMP_ALU_FAILED, EVENT_TEMP_ALU_RECOVER);
 #endif
 
     nilThdSleepMilliseconds(5000);
@@ -124,8 +121,6 @@ void getTemperature(OneWire &ow, int parameter, byte errorBit, byte failedEvent,
     }
   }
 }  
-
-
 
 #endif
 

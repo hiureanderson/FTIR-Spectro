@@ -12,33 +12,21 @@
  * to the EEPROM
  *********************************************/
 
-
-
+//internal arduino 512 bits EEPROM
 #include <avr/eeprom.h>
-
-#ifdef EEPROM_DUMP
 #define EEPROM_MIN_ADDR            0
 #define EEPROM_MAX_ADDR          511
-#include <EEPROM.h> // should be removed and based only on avr/eeprom
-#endif
-
-//define Lock byte as last position on the EEPROM
+//Lock byte as last position on the EEPROM
 #define LOCKER EEPROM_MAX_ADDR
 
-
-#define MAX_PARAM 25   // If the MAX_PARAM change you need to change the pointer in the EEPROM
-
+// If the MAX_PARAM change you need to change the pointer in the EEPROM
+#define MAX_PARAM 25   
+#define EE_START_PARAM           0 // We save the parameter from byte 0 of EEPROM
+#define EE_LAST_PARAM            (MAX_PARAM*2-1) // The last parameter is stored at byte 50-51
 
 //When parameters are set (and saved) an event is recorded (256-281 : A-Z + .... (if more parameters than 26))
 #define EVENT_SAVE_ALL_PARAMETER     255
 #define EVENT_PARAMETER_SET          256
-
-
-#define EE_START_PARAM           0 // We save the parameter from byte 0 of EEPROM
-#define EE_LAST_PARAM            (MAX_PARAM*2-1) // The last parameter is stored at byte 50-51
-
-#define EEPROM_MIN_ADDR            0
-#define EEPROM_MAX_ADDR          511
 
 // value that should not be taken into account
 // in case of error the parameter is set to this value

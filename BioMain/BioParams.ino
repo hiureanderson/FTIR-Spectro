@@ -24,8 +24,10 @@ void resetParameters() {
   setAndSaveParameter(PARAM_TEMP_SINK, ERROR_VALUE);
   setAndSaveParameter(PARAM_TEMP_SENSOR, ERROR_VALUE);
   setAndSaveParameter(PARAM_TEMP_ALU, ERROR_VALUE);
-  setAndSaveParameter(PARAM_TEMP_IR_MAX, 7000);
-  setAndSaveParameter(PARAM_TEMP_SINK_MAX, 7000);
+  #if defined (PELTIER_PID)
+    setAndSaveParameter(PARAM_TEMP_IR_MAX, 7000);
+    setAndSaveParameter(PARAM_TEMP_SINK_MAX, 7000);
+  #endif
   
   #ifdef TEMP_PID
   setAndSaveParameter(PARAM_TARGET_SENSOR_TEMP, -500);

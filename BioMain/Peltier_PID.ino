@@ -19,7 +19,7 @@ unsigned long coolingRegWindowStartTime;
 PID coolingRegPID(&coolingRegInput, &coolingRegOutput, &coolingRegSetpoint, 7000,15,1600, DIRECT);
 
 
-NIL_WORKING_AREA(waThread_Peltier, 64); // minimum of 16 The momory change with time
+NIL_WORKING_AREA(waThread_Peltier, 128); // minimum of 16 The momory change with time
 NIL_THREAD(Thread_Peltier, arg) 
 {
   
@@ -35,7 +35,7 @@ NIL_THREAD(Thread_Peltier, arg)
      
      #ifdef DEBUG_PID
      if(count%30==0)
-      Serial.print(getParameter(PARAM_TEMP_SAMPLE));
+      Serial.print(getParameter(PARAM_TEMP_SENSOR));
     count=(count+1)%101;
     #endif
     
@@ -62,15 +62,17 @@ void pid_ctrl()
   }
   
    if((coolingRegOutput > exactPresentTime - coolingRegWindowStartTime) 
-    && (getParameter(PARAM_TEMP_SINK)<getParameter(PARAM_TEMP_SINK_MAX))
+    //&& (getParameter(PARAM_TEMP_SINK)<getParameter(PARAM_TEMP_SINK_MAX))
     && (getParameter(PARAM_TEMP_SENSOR)>getParameter(PARAM_TEMP_SENSOR_MIN))
     && (getParameter(PARAM_TEMP_SENSOR) != 0xFF) && (getParameter(PARAM_TEMP_SINK)!=0xFF))
   {
+    Serial.println("on");
     digitalWrite(PELTIER_75, HIGH);
     digitalWrite(PELTIER_50, HIGH);
   }  
   else 
   {
+    Serial.println("off");
     digitalWrite(PELTIER_75, LOW);
     digitalWrite(PELTIER_50, LOW);
   } 

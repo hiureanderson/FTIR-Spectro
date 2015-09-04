@@ -11,27 +11,27 @@
 #include <Wire.h> //I2C library
 #include <wdt.h> //I2C library
 
-#define WRITE_DELAY    0// 4ms wait before next write  
-
-
 //reduced log size for optimized memory use
-#ifndef MODE_MEMORY_SAVE
  #define ENTRY_SIZE_LOGS     32 // Each log take 32 bytes
  #define NB_PARAMETERS_LOGS  10
  #define SIZE_MEMORY     65536 // M24512, 512 Kbits = 64Kbytes
  #define NBMAX_LOGS     2048
  #define EntryID_MAX  NBMAX_LOGS-1
+
+// TO BE DONE
+// LOG Should be : Cycle # (int16), Step # (int32), IR_intensity (int16)
+// That is a short 8bytes log in EEPROM, allows for improved life of the EEPROM
+// The last entry should be find at startup as the higher ID but ID is now a combination od cycle # and step #
+
+/* 
+#ifdef TYPE_FTIR
+  #define ENTRY_SIZE_LOGS 8
+   #define NB_PARAMETERS_LOGS  4
+   #define SIZE_MEMORY         65536 // M24512, 512 Kbits = 64Kbytes
+   #define NBMAX_LOGS          8192
+   #define EntryID_MAX         NBMAX_LOGS-1 
 #endif
- 
- 
-#ifdef MODE_MEMORY_SAVE
- #define ENTRY_SIZE_LOGS     16 // Each log take 32 bytes
- #define NB_PARAMETERS_LOGS  4
- #define SIZE_MEMORY     65536 // M24512, 512 Kbits = 64Kbytes
- #define NBMAX_LOGS     4096
- #define EntryID_MAX  NBMAX_LOGS-1
-#endif 
- 
+*/
 
 //#define DEBUG_FLAG 1
 

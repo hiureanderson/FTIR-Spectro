@@ -48,12 +48,15 @@
   #define IR_SRC      DIGITAL_6
   #define PUMP_12V    DIGITAL_9
   
-//  #define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
-    #define PELTIER_PID  1    //Peltier Cooling Thread
+  #define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
+    //#define PELTIER_PID  1    //Peltier Cooling Thread
+
+
+    #define TEMP_ALU       ANALOG_0    //PID COLD
     #define TEMP_IR        ANALOG_1 
-    #define TEMP_SINK      ANALOG_0
-    #define TEMP_SENSOR    ANALOG_2
-    #define TEMP_ALU       ANALOG_3 
+    #define TEMP_SINK      ANALOG_2
+    #define TEMP_SENSOR    ANALOG_3    //PID HOT
+
     #define PELTIER_50     DIGITAL_7   //PWM
     #define PELTIER_75     DIGITAL_10  //PWM
 
@@ -72,7 +75,6 @@
 /***********************
  * SERIAL, LOGGER AND DEBUGGER
  ************************/
-// #define EEPROM_DUMP   1   // Gives the menu allowing to dump the EEPROM
 
 #define THR_SERIAL        1
 
@@ -91,10 +93,10 @@
 #endif
 
 #ifdef     TEMPERATURE_CTRL
-  #define PARAM_TEMP_IR      3
-  #define PARAM_TEMP_SINK    4
+  #define PARAM_TEMP_ALU     3
+  #define PARAM_TEMP_IR      4
   #define PARAM_TEMP_SENSOR  5
-  #define PARAM_TEMP_ALU     6
+  #define PARAM_TEMP_SINK    6
   #if defined (PELTIER_PID)
     #define PARAM_TARGET_SENSOR_TEMP          7
     #define PARAM_TEMP_IR_MAX                 8
@@ -149,6 +151,7 @@ void setup() {
 
 void loop() {
   
+  /*
   delay(2000);
   pinMode(IR_FAN,OUTPUT);
   digitalWrite(IR_FAN,HIGH);  
@@ -157,6 +160,6 @@ void loop() {
   digitalWrite(IR_SRC,HIGH);
   delay(2000);
     pinMode(PUMP_12V ,OUTPUT);
-  digitalWrite(PUMP_12V ,HIGH);
+  digitalWrite(PUMP_12V ,HIGH);*/
 
 }
