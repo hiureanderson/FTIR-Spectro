@@ -92,7 +92,7 @@ void printResult(char* data, Print* output) {
     }    
     
     else if (inChar=='i') { // show i2c (wire) information
-#if defined(GAS_CTRL) || defined(I2C_LCD) || defined(PH_CTRL) || defined(I2C_RELAY_FOOD) || defined(TYPE_SOLAR) // add I2C_EEPROM , CHIPCAP , ...
+#if defined(I2C_EEPROM)|| defined (I2C_IR_INTENSITY) // add I2C_EEPROM , CHIPCAP , ...
       wireInfo(output); 
 #else  //not elsif !!
       noThread(output);

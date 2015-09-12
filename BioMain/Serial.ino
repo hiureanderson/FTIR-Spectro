@@ -4,7 +4,7 @@
 char serialBuffer[SERIAL_BUFFER_LENGTH];
 byte serialBufferPosition=0;
 
-NIL_WORKING_AREA(waThreadSerial, 150); // minimum 128
+NIL_WORKING_AREA(waThreadSerial, 240); // minimum 128
 NIL_THREAD(ThreadSerial, arg) {
 
   Serial.begin(9600);
@@ -31,7 +31,7 @@ NIL_THREAD(ThreadSerial, arg) {
         }
       }  
     }
-    nilThdSleepMilliseconds(1);
+    nilThdSleepMilliseconds(30);
   }
 }
 

@@ -28,6 +28,7 @@
 #define DIGITAL_8       8//D8 A8
 #define DIGITAL_9       9//D9 OC4B, OC1A, PCINT5
 #define DIGITAL_10      10//D10 A10
+#define DIGITAL_11      11//D11
 #define DIGITAL_13      13//D13
 
 #define ANALOG_0     18//0
@@ -43,25 +44,25 @@
 #ifdef TYPE_FTIR
   #define MODEL_ZIGBEE       //Serial Com on Zigbee antenna SZ05
   #define I2C_EEPROM 80      //I2C EEPROM memory 512k or 1M (m24512)
+  #define EEPROM_ENABLE DIGITAL_11
   
   #define IR_FAN      DIGITAL_5
   #define IR_SRC      DIGITAL_6
   #define PUMP_12V    DIGITAL_9
   
-  #define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
+  //#define TEMPERATURE_CTRL 1    //DS18B20+ OneWire inputs
     //#define PELTIER_PID  1    //Peltier Cooling Thread
-
-
+    
     #define TEMP_ALU       ANALOG_0    //PID COLD
     #define TEMP_IR        ANALOG_1 
     #define TEMP_SINK      ANALOG_2
     #define TEMP_SENSOR    ANALOG_3    //PID HOT
 
     #define PELTIER_50     DIGITAL_7   //PWM
-    #define PELTIER_75     DIGITAL_10  //PWM
+    #define PELTIER_75     DIGITAL_10  //PWM 
 
-//  #define IR_SENSE      1
-    #define I2C_IR_INTENSITY  9   //change the digital input here with the I2 address of the ADC
+  #define IR_SENSE      1
+    #define I2C_IR_INTENSITY  104   //change the digital input here with the I2 address of the ADC
     #define IR_INTENSITY      ANALOG_4   
   
 //  #define PIEZO_DRV           1 //piezo driver on DAC1220 via SPI
@@ -141,8 +142,28 @@ uint16_t autoreboot=0;
 void setup() {
   delay(2000);
   Serial.begin(9600);
-  delay(1000);
+  delay(1000);  
+  //set memory enable pin
+  pinMode(EEPROM_ENABLE,OUTPUT);
+  //set analog read on IR_INTENSITY
+  pinMode(IR_INTENSITY,INPUT); 
+  //set hexfets to output
+  pinMode(IR_FAN,OUTPUT);
+  //digitalWrite(IR_FAN,HIGH);
+  pinMode(IR_SRC,OUTPUT);
+  //digitalWrite(IR_SRC,HIGH);
+  pinMode(PUMP_12V,OUTPUT);
+  pinMode(PELTIER_50,OUTPUT);
+  pinMode(PELTIER_75,OUTPUT);
   setupParameters();
+
+    /*
+    ADCSRA |= (_BV(ADEN)); // Turn on ADC
+    ADCSRB |= (_BV(ACME)); // Turn on Analog Comparator    
+    PRR0 = 0x00;  // Power Reduction Registers  
+    PRR1 = 0x00;  // set to 0b0, 0b0
+    MCUCR &= ~(_BV(JTD)); // Enable on-chip debug system
+    DIDR0 = 0x00; // Analog to digital pin's digital input buffer is turned on*/
 
   setSafeConditions(false);
   nilSysBegin();
@@ -153,13 +174,10 @@ void loop() {
   
   /*
   delay(2000);
-  pinMode(IR_FAN,OUTPUT);
   digitalWrite(IR_FAN,HIGH);  
-  delay(3000);
-  pinMode(IR_SRC,OUTPUT);
+  delay(2000);
   digitalWrite(IR_SRC,HIGH);
   delay(2000);
-    pinMode(PUMP_12V ,OUTPUT);
   digitalWrite(PUMP_12V ,HIGH);*/
 
 }

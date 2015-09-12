@@ -52,7 +52,8 @@ NIL_THREADS_TABLE_BEGIN()
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadZigbee, NULL, waThreadZigbee, sizeof(waThreadZigbee))
 #endif
 
-#ifdef I2C_EEPROM
+
+#if defined(I2C_EEPROM) || defined(IR_I2C_INTENSITY)
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadI2C_EEPROM, NULL, waThreadI2C_EEPROM, sizeof(waThreadI2C_EEPROM))
 #endif
 
@@ -70,7 +71,7 @@ NIL_THREADS_TABLE_ENTRY(NULL, ThreadSerial, NULL, waThreadSerial, sizeof(waThrea
 #endif
 
 
-#if defined(I2_EEPROM)
+#if defined(I2C_EEPROM)
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadWire, NULL, waThreadWire, sizeof(waThreadWire))
 #endif
 

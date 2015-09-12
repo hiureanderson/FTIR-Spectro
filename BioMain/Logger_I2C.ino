@@ -11,27 +11,14 @@
 #include <Wire.h> //I2C library
 #include <wdt.h> //I2C library
 
-//reduced log size for optimized memory use
- #define ENTRY_SIZE_LOGS     32 // Each log take 32 bytes
- #define NB_PARAMETERS_LOGS  10
+#define WRITE_DELAY    0// 4ms wait before next write  
+ 
+ #define ENTRY_SIZE_LOGS     16 // Each log take 32 bytes
+ #define NB_PARAMETERS_LOGS  4
  #define SIZE_MEMORY     65536 // M24512, 512 Kbits = 64Kbytes
- #define NBMAX_LOGS     2048
+ #define NBMAX_LOGS     4096
  #define EntryID_MAX  NBMAX_LOGS-1
-
-// TO BE DONE
-// LOG Should be : Cycle # (int16), Step # (int32), IR_intensity (int16)
-// That is a short 8bytes log in EEPROM, allows for improved life of the EEPROM
-// The last entry should be find at startup as the higher ID but ID is now a combination od cycle # and step #
-
-/* 
-#ifdef TYPE_FTIR
-  #define ENTRY_SIZE_LOGS 8
-   #define NB_PARAMETERS_LOGS  4
-   #define SIZE_MEMORY         65536 // M24512, 512 Kbits = 64Kbytes
-   #define NBMAX_LOGS          8192
-   #define EntryID_MAX         NBMAX_LOGS-1 
-#endif
-*/
+ 
 
 //#define DEBUG_FLAG 1
 
@@ -337,10 +324,14 @@ void i2c_eeprom_read_buffer( int deviceaddress, unsigned int eeaddress, byte *bu
 void i2c_eeprom_write_check_int( int deviceaddress, unsigned int eeaddress, int data){
   int written = 0; 
   int i=0;
+  #ifdef EEPROM_ENABLE
+    digitalWrite(EEPROM_ENABLE,LOW);
+  #endif
+  
   do{
     i2c_eeprom_write_int(deviceaddress, eeaddress, data);
     //placed here to let time between write and read (3ms causes bug)
-    nilThdSleepMilliseconds(7); 
+    nilThdSleepMilliseconds(5); 
     written = i2c_eeprom_read_int(deviceaddress, eeaddress); 
     i++;
   }
@@ -351,6 +342,9 @@ void i2c_eeprom_write_check_int( int deviceaddress, unsigned int eeaddress, int 
     #endif
     delay(15);
   }
+    #ifdef EEPROM_ENABLE
+      digitalWrite(EEPROM_ENABLE,HIGH);
+    #endif
 }
 
 uint32_t i2c_eeprom_read_int32(int deviceaddress, unsigned int eeaddress){ 
@@ -394,6 +388,7 @@ void i2c_eeprom_init_erase(int deviceaddress){
 //not working well
 void i2c_eeprom_erase(int deviceaddress){
   setTime(0);
+  wdt_disable();
   for(unsigned int i=0; i<=(ADDRESS_MAX_EEPROM)/2;i++){
     i2c_eeprom_write_check_int(DEVICE_ADDRESS,2*i,-1);
     if(!(i%200))
@@ -401,6 +396,8 @@ void i2c_eeprom_erase(int deviceaddress){
       //nilThdSleepMilliseconds(20);
     //delay(10);
   }
+  wdt_enable(WDTO_8S);
+  wdt_reset();
   Serial.println("Done"); 
   erase_flag=false;
 }

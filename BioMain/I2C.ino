@@ -1,15 +1,12 @@
-#if defined I2C_EEPROM
-
 #include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_TSL2561_U.h>
 
 #define WIRE_MAX_DEVICES 5
 byte numberI2CDevices=0;
 byte wireDeviceID[WIRE_MAX_DEVICES];
-#ifdef I2C_RELAY_FOOD
-byte previousPumpRelayFlag=127;
-#endif
 
-NIL_WORKING_AREA(waThreadWire, 144);
+NIL_WORKING_AREA(waThreadWire,88);
 NIL_THREAD(ThreadWire, arg) {
 
   nilThdSleepMilliseconds(1000);
@@ -17,8 +14,6 @@ NIL_THREAD(ThreadWire, arg) {
   byte aByte=0;
   byte* wireFlag32=&aByte;
   unsigned int wireEventStatus=0;
-  //boolean relayInitialized = false;
-  //TODO: PLUG IN / OUT CRASH THE SYSTEM !!! {
   Wire.begin();
 
   while(true) {
@@ -27,9 +22,43 @@ NIL_THREAD(ThreadWire, arg) {
       wireUpdateList();
     }
     wireEventStatus++;
+    
+    #ifdef IR_SENSE
+    setParameter(PARAM_I2C_IR,getSensor());
+    Serial.println(getParameter(PARAM_I2C_IR));
+    delay(10);
+    #endif
+  
+    nilThdSleepMilliseconds(400); 
+           
   }
 }
 
+/***********************
+   Dedicated to MCP3424
+************************/
+#ifdef IR_SENSE
+int getSensor() {
+    if (wireDeviceExists(I2C_IR_INTENSITY)) {
+      int sum=0;
+      byte i=0;
+      //built-in average
+      for(i=0; i<6;i++){
+        wireWrite(I2C_IR_INTENSITY,0b10010000);
+        nilThdSleepMilliseconds(6);
+        sum += wireReadFourBytesToInt(I2C_IR_INTENSITY);
+        nilThdSleepMilliseconds(100);
+      }
+      sum = sum/i;
+      return sum;
+    }
+    else{
+      //could be anything above PH_INTERCEPT, 
+      //just to produce a negative pH value->error
+      return 0xFFFF;  
+    }
+  }
+#endif
 
 /********************
  * Utilities functions 
@@ -49,6 +78,40 @@ void wireWrite(uint8_t address, uint8_t reg, uint8_t _data ) // used by 4-relay
   Wire.endTransmission();
 }
 
+
+void wireSMBWrite(uint8_t address,uint8_t command,uint8_t _data){
+  Wire.beginTransmission(address);
+  Wire.write(command);
+  Wire.write(_data);
+  Wire.endTransmission();
+}
+
+
+byte wireSMBRead(uint8_t address,uint8_t command){
+  byte _data=0;
+  Wire.beginTransmission(address);
+  Wire.write(command);
+  Wire.requestFrom(address, (uint8_t)1);
+  if(Wire.available()) {
+    _data = Wire.read();
+  }
+  Wire.endTransmission();
+  return _data;  
+}
+
+byte wireRegRead(uint8_t address,uint8_t reg){
+  byte _data=0;
+  Wire.beginTransmission(address);
+  Wire.write(reg);
+  Wire.endTransmission(false); // Send data to I2C dev with option for a repeated start
+  Wire.requestFrom(address, (uint8_t)1);
+  if(Wire.available()) {
+    _data = Wire.read();
+  }
+  Wire.endTransmission();
+  return _data;  
+}
+
 byte wireRead(uint8_t address) {
   byte _data = 0;
   Wire.requestFrom(address, (uint8_t)1);
@@ -57,6 +120,7 @@ byte wireRead(uint8_t address) {
   }
   return _data;
 }
+
 
 int wireReadTwoBytesToInt(uint8_t address) {
   int i = 0;
@@ -203,7 +267,6 @@ boolean wireFlagStatus(byte *aByte, byte address) {
   return *aByte & (1 << (address & 0b00000111));
 }
 
-#endif
 
 
 
