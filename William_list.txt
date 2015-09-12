@@ -1,0 +1,50 @@
+Order From William
+
+002X 350mA 100VDC --> ok
+http://www.alibaba.com/product-detail/50W-constant-current-Single-output-Non_60109745699.html
+
+001X PE HDPE 0.5mm thick A4 sheet (no PVC !! pure PE only !)
+
+010X DIN 934 hex Nut M2
+010X DIN 934 hex Nut M4
+005X DIN 912 hex Screw M2 13mm
+005X DIN 912 hex Screw M2 25mm
+005X DIN 912 hex Screw M4 20mm
+005X UNC 4-40 screw 7-8mm
+
+200X Thread Forming screw M3 5mm
+http://www.alibaba.com/product-detail/Security-pozi-screw-m3x5-stainless-steel_60266052503.html?spm=a2700.7724838.35.1.xoDk30&s=p
+
+Mica sheets (0.1mm 30X20mm) 
+
+1st quote
+led power=12usd/pcs X2          24
+A4 0.5MM pe roll=2usd/pcs X4    28
+Screw and nuts=20usd            48
+3d print total=220usd          268
+Mica sheet.could I make it 4$  272
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+2nd order for Solar Decathlon
+
+20X raspi 2 model B plastic enclosure
+20X short USB micro cables 15cm
+20X raspi 2 USB power supply
+20X 5m length RJ45 cables category 6
+20X 16Go Sandisk quality SD card
+
+First quote
+20X raspi 2 model B plastic enclosure 2$/pcs		40
+20X short USB micro cables    2$/pcs			80
+20X raspi 2 USB power supply with line  6$/pcs		200
+20X 5m length RJ45 cables category 6  5$/pcs		300
+20X 16Go Sandisk quality SD card. 10$/pcs		500
+
+Added to the initial 290 USD first order --> 800 USD
+Shipping --> about 100 USD 
+William compensation --> 50DUSD 
+Grand total 950 USD
+With 250 USD dedicated to FTIR
+

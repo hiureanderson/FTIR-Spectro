@@ -29,7 +29,7 @@ NIL_THREAD(ThreadWire, arg) {
     delay(10);
     #endif
   
-    nilThdSleepMilliseconds(400); 
+    nilThdSleepMilliseconds(200); 
            
   }
 }
@@ -43,13 +43,13 @@ int getSensor() {
       int sum=0;
       byte i=0;
       //built-in average
-      for(i=0; i<6;i++){
+      //for(i=0; i<6;i++){
         wireWrite(I2C_IR_INTENSITY,0b10010000);
         nilThdSleepMilliseconds(6);
         sum += wireReadFourBytesToInt(I2C_IR_INTENSITY);
-        nilThdSleepMilliseconds(100);
-      }
-      sum = sum/i;
+        //nilThdSleepMilliseconds(100);
+      //}
+      //sum = sum/i;
       return sum;
     }
     else{
