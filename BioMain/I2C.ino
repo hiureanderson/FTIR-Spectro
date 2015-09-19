@@ -22,43 +22,11 @@ NIL_THREAD(ThreadWire, arg) {
       wireUpdateList();
     }
     wireEventStatus++;
-    
-    #ifdef IR_SENSE
-    setParameter(PARAM_I2C_IR,getSensor());
-    Serial.println(getParameter(PARAM_I2C_IR));
-    delay(10);
-    #endif
-  
-    nilThdSleepMilliseconds(200); 
+ 
+    nilThdSleepMilliseconds(500); 
            
   }
 }
-
-/***********************
-   Dedicated to MCP3424
-************************/
-#ifdef IR_SENSE
-int getSensor() {
-    if (wireDeviceExists(I2C_IR_INTENSITY)) {
-      int sum=0;
-      byte i=0;
-      //built-in average
-      //for(i=0; i<6;i++){
-        wireWrite(I2C_IR_INTENSITY,0b10010000);
-        nilThdSleepMilliseconds(6);
-        sum += wireReadFourBytesToInt(I2C_IR_INTENSITY);
-        //nilThdSleepMilliseconds(100);
-      //}
-      //sum = sum/i;
-      return sum;
-    }
-    else{
-      //could be anything above PH_INTERCEPT, 
-      //just to produce a negative pH value->error
-      return 0xFFFF;  
-    }
-  }
-#endif
 
 /********************
  * Utilities functions 

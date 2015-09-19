@@ -52,11 +52,9 @@ NIL_THREADS_TABLE_BEGIN()
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadZigbee, NULL, waThreadZigbee, sizeof(waThreadZigbee))
 #endif
 
-
 #if defined(I2C_EEPROM) || defined(IR_I2C_INTENSITY)
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadI2C_EEPROM, NULL, waThreadI2C_EEPROM, sizeof(waThreadI2C_EEPROM))
 #endif
-
 
 #ifdef TEMPERATURE_CTRL
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadTemp, NULL, waThreadTemp, sizeof(waThreadTemp))   
@@ -65,15 +63,18 @@ NIL_THREADS_TABLE_ENTRY(NULL, Thread_Peltier, NULL, waThread_Peltier, sizeof(waT
 #endif    
 #endif
 
-
 #ifdef THR_SERIAL
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadSerial, NULL, waThreadSerial, sizeof(waThreadSerial))
 #endif
 
-
-#if defined(I2C_EEPROM)
+#if defined(I2C_EEPROM) || defined(I2C_IR_INTENSITY)
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadWire, NULL, waThreadWire, sizeof(waThreadWire))
 #endif
+
+#if defined (PIEZO_DRV) && defined(I2C_IR_INTENSITY)
+NIL_THREADS_TABLE_ENTRY(NULL, ThreadIR, NULL, waThreadIR, sizeof(waThreadIR))  
+#endif
+
 
 #ifdef THR_MONITORING
 NIL_THREADS_TABLE_ENTRY(NULL, ThreadMonitoring, NULL, waThreadMonitoring, sizeof(waThreadMonitoring))

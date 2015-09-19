@@ -65,8 +65,8 @@
     #define I2C_IR_INTENSITY  104   //change the digital input here with the I2 address of the ADC
     #define IR_INTENSITY      ANALOG_4   
   
-//  #define PIEZO_DRV           1 //piezo driver on DAC1220 via SPI
-    #define PIEZO_SELECT      DITGITAL_8     
+  #define PIEZO_DRV           1 //piezo driver on DAC1220 via SPI
+    #define PIEZO_SELECT      DIGITAL_8     
 
   #define THR_MONITORING     1  // starts the blinking led and the watch dog counter 
   #define MONITORING_LED     DIGITAL_13
@@ -147,11 +147,13 @@ void setup() {
   pinMode(EEPROM_ENABLE,OUTPUT);
   //set analog read on IR_INTENSITY
   pinMode(IR_INTENSITY,INPUT); 
-  //set hexfets to output
+  //set enable pin for the DAC (piezo driver 0-5V reference)
+  pinMode(PIEZO_SELECT,OUTPUT);
+  //set hexfets to output (to be set in an external interruption routine so everything is not up all the time but just on request)
   pinMode(IR_FAN,OUTPUT);
-  //digitalWrite(IR_FAN,HIGH);
+  digitalWrite(IR_FAN,HIGH);
   pinMode(IR_SRC,OUTPUT);
-  //digitalWrite(IR_SRC,HIGH);
+  digitalWrite(IR_SRC,HIGH);
   pinMode(PUMP_12V,OUTPUT);
   pinMode(PELTIER_50,OUTPUT);
   pinMode(PELTIER_75,OUTPUT);
@@ -173,10 +175,6 @@ void setup() {
 void loop() {
   
   /*
-  delay(2000);
-  digitalWrite(IR_FAN,HIGH);  
-  delay(2000);
-  digitalWrite(IR_SRC,HIGH);
   delay(2000);
   digitalWrite(PUMP_12V ,HIGH);*/
 

@@ -19,6 +19,10 @@
 //Lock byte as last position on the EEPROM
 #define LOCKER EEPROM_MAX_ADDR
 
+#if defined (PIEZO_DRV) && defined(I2C_IR_INTENSITY)
+  #define EEPROM_IR_FLAG (EEPROM_MAX_ADDR-1)
+#endif
+
 // If the MAX_PARAM change you need to change the pointer in the EEPROM
 #define MAX_PARAM 25   
 #define EE_START_PARAM           0 // We save the parameter from byte 0 of EEPROM
