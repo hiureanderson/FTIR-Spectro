@@ -17,25 +17,25 @@ Date   : 16.09.2015
 
 NIL_WORKING_AREA(waThreadIR,96);
 NIL_THREAD(ThreadIR, arg) {      
-  
-  
 
+  //wait for all threads to be ready
+  nilThdSleepMilliseconds(5000); 
+  //setup SPI interface
+  SPI.begin();  
+  nilThdSleepMilliseconds(200);   
+  //Set DAC 1220  	
+  SPI.setBitOrder(MSBFIRST);
+  digitalWrite(PIEZO_SELECT, LOW);
+  SPI.transfer(0b00100100); // Cmd byte=Write mode (1st bit= 0, 2 bytes to write 0bx01xXXXX on CMR (addr4))
+  SPI.transfer(0b00100000); //config MSB 
+  SPI.transfer(0b00110000); //config LSB
+  //end communication
+  digitalWrite(PIEZO_SELECT, HIGH);
+  //lock acquisition awating for acquisition order
+  eeprom_write_word((uint16_t*) LOCKER,0);
+  
   while(TRUE){
-    
-     //wait for all threads to be ready
-     nilThdSleepMilliseconds(5000); 
-     //setup SPI interface
-     SPI.begin();  
-     nilThdSleepMilliseconds(200);   
-     //Set DAC 1220  	
-     SPI.setBitOrder(MSBFIRST);
-     digitalWrite(PIEZO_SELECT, LOW);
-     //SPI.transfer(0b00100100);       // Cmd byte=Write mode (1st bit= 0, 2 bytes to write 0bx01xXXXX)
-     //two configuration bytes
 
-     digitalWrite(PIEZO_SELECT, HIGH);
-     //lock acquisition before order arrives
-     eeprom_write_word((uint16_t*) LOCKER,0);
      
      //thread variables
      unsigned int step_number=0; // step number beween 0 and MAX_STEP
@@ -46,9 +46,9 @@ NIL_THREAD(ThreadIR, arg) {
       
         //Set DAC 1220
         digitalWrite(PIEZO_SELECT, LOW);
-        //SPI.transfer(0b0010XXXX);       // Cmd byte=Write mode (1st bit= 0, 1 byte to write 0bx01xXXXX)
-        //3 bytes to write for voltage control
-        //SPI.transfer(step_number);  // change for the correct value
+        SPI.transfer(0b00100000);   // Cmd byte=Write mode (1st bit= 0, 1 byte to write 0bx01xXXXX addr0=DIR_MSB)
+        SPI.transfer((byte)((step_number>>8)& 0xFF));  // DIR MSB
+        SPI.transfer((byte)((step_number)& 0xFF));      // DIR LSB       
         digitalWrite(PIEZO_SELECT, HIGH);
         //Acquisition of the IR sensor on 16 bits I2C with auto-average
         setParameter(PARAM_I2C_IR,getSensor());
@@ -62,7 +62,7 @@ NIL_THREAD(ThreadIR, arg) {
   
         //go to the next step
         step_number= (step_number +STEP_JUMP) % (MAX_STEP); 	
-        nilThdSleepMilliseconds(200); 
+        nilThdSleepMilliseconds(100); 
     }
   }
   
