@@ -149,6 +149,11 @@ void setup() {
   pinMode(IR_INTENSITY,INPUT); 
   //set enable pin for the DAC (piezo driver 0-5V reference)
   pinMode(PIEZO_SELECT,OUTPUT);
+  digitalWrite(PIEZO_SELECT,HIGH);
+  pinMode(SS,OUTPUT);
+  pinMode(SCK, OUTPUT);
+  pinMode(MISO, INPUT);
+  pinMode(MOSI, OUTPUT);
   //set hexfets to output (to be set in an external interruption routine so everything is not up all the time but just on request)
   pinMode(IR_FAN,OUTPUT);
   digitalWrite(IR_FAN,HIGH);
