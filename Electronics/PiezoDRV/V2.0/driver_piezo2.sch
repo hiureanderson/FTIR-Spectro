@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.0.0">
+<eagle version="7.1.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3689,8 +3689,8 @@ Source: www.vishay.com .. rwm.pdf</description>
 <wire x1="4.76" y1="-12.02" x2="-5.02" y2="-12.02" width="0.06" layer="21"/>
 <wire x1="-5.02" y1="-12.02" x2="-5.02" y2="12.98" width="0.06" layer="21"/>
 <wire x1="-5.02" y1="12.98" x2="4.76" y2="12.98" width="0.06" layer="21"/>
-<pad name="P$1" x="-2.72" y="-9.98" drill="2.55" shape="square"/>
-<pad name="P$2" x="-2.72" y="10.95" drill="2.55" shape="square"/>
+<pad name="P$1" x="-2.72" y="-9.99" drill="2.6" shape="square"/>
+<pad name="P$2" x="-2.72" y="10.95" drill="2.6" shape="square"/>
 </package>
 <package name="SO14">
 <wire x1="4.305" y1="1.9" x2="4.305" y2="-1.4" width="0.2032" layer="21"/>
@@ -10555,9 +10555,9 @@ Source: http://www.zetex.com/3.0/pdf/FMMT717.pdf</description>
 <parts>
 <part name="1M" library="resistor-power" deviceset="R" device="CA0002"/>
 <part name="GNDP" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="OUTPIEZOP" library="pinhead" deviceset="PINHD-1X1" device=""/>
+<part name="OUTPIEZO+" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="GND2" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="VINS" library="pinhead" deviceset="PINHD-1X1" device=""/>
+<part name="96V" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="J1" library="lpatiny" deviceset="RJ12" device="STRAIGHT-ANALOG"/>
 <part name="CAP_POWER" library="PIEZO_LBR" deviceset="CAP200V" device="CAP200V"/>
 <part name="LD090" library="PIEZO_LBR" deviceset="TPS7A4001" device=""/>
@@ -10690,9 +10690,9 @@ Source: http://www.zetex.com/3.0/pdf/FMMT717.pdf</description>
 <instances>
 <instance part="1M" gate="G$1" x="-19.73" y="52.72" rot="R270"/>
 <instance part="GNDP" gate="G$1" x="-14.65" y="-0.62"/>
-<instance part="OUTPIEZOP" gate="G$1" x="-14.65" y="-10.78"/>
+<instance part="OUTPIEZO+" gate="G$1" x="-14.65" y="-10.78"/>
 <instance part="GND2" gate="G$1" x="-80.69" y="50.18" rot="R180"/>
-<instance part="VINS" gate="G$1" x="-80.69" y="60.34" rot="R180"/>
+<instance part="96V" gate="G$1" x="-80.69" y="60.34" rot="R180"/>
 <instance part="J1" gate="G$1" x="-86.36" y="-5.08" rot="R180"/>
 <instance part="CAP_POWER" gate="G$1" x="-2.54" y="53.34"/>
 <instance part="LD090" gate="G$1" x="30.48" y="53.34"/>
@@ -10905,7 +10905,7 @@ Source: http://www.zetex.com/3.0/pdf/FMMT717.pdf</description>
 </net>
 <net name="OUT_PIEZO" class="0">
 <segment>
-<pinref part="OUTPIEZOP" gate="G$1" pin="1"/>
+<pinref part="OUTPIEZO+" gate="G$1" pin="1"/>
 <wire x1="-17.19" y1="-10.78" x2="-24.81" y2="-10.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -11120,7 +11120,7 @@ Source: http://www.zetex.com/3.0/pdf/FMMT717.pdf</description>
 <pinref part="T1" gate="G$1" pin="E"/>
 </segment>
 <segment>
-<pinref part="VINS" gate="G$1" pin="1"/>
+<pinref part="96V" gate="G$1" pin="1"/>
 <wire x1="-78.15" y1="60.34" x2="-70.53" y2="60.34" width="0.1524" layer="91"/>
 </segment>
 </net>

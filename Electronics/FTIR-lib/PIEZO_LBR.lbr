@@ -110,8 +110,8 @@
 <wire x1="4.76" y1="-12.02" x2="-5.02" y2="-12.02" width="0.06" layer="21"/>
 <wire x1="-5.02" y1="-12.02" x2="-5.02" y2="12.98" width="0.06" layer="21"/>
 <wire x1="-5.02" y1="12.98" x2="4.76" y2="12.98" width="0.06" layer="21"/>
-<pad name="P$1" x="-2.72" y="-9.98" drill="2.55" shape="square"/>
-<pad name="P$2" x="-2.72" y="10.95" drill="2.55" shape="square"/>
+<pad name="P$1" x="-2.72" y="-9.99" drill="2.6" shape="square"/>
+<pad name="P$2" x="-2.72" y="10.95" drill="2.6" shape="square"/>
 </package>
 <package name="S-PDSO-G08">
 <wire x1="-1.425" y1="1.4067" x2="1.425" y2="1.4067" width="0.2032" layer="21"/>
